@@ -16,13 +16,13 @@ This is a simple queue-based message delivery service written using Node.js.
 2) Run **node serverSolution.js**, this will start the server running on port 3000
 3) Open up another terminal window
 4) Make 'enqueue' or 'next' requests from the new window in this manner:
-- curl -d "{\"test\": \"Nebula\", \"int_value\": 0, \"_special\": \"someVal\"}" -H "Content-Type: application/json" -X POST http://localhost:3000/enqueue
+- curl -d "{\\"test\\": \\"Nebula\\", \\"int_value\\": 0, \\"_special\\": \\"someVal\\"}" -H "Content-Type: application/json" -X POST http://localhost:3000/enqueue
 
-- curl -d "{\"queue\": 0}" -H "Content-Type: application/json" -X POST http://localhost:3000/next
+- curl -d "{\\"queue\\": 0}" -H "Content-Type: application/json" -X POST http://localhost:3000/next
 
 The "-d" flag specifies the JSON data, and the "-H" flag specifies the POST content as JSON.
 
-*NOTE: when making CURL requests on Windows you can only enter double quotes and you must escape them with a backslash*
+*NOTE: when making CURL requests on Windows, JSON can only have double quotes (not single) and you must escape them with a backslash*
 
 ### Upcoming Changes
 
