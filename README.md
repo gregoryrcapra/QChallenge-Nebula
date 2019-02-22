@@ -22,7 +22,7 @@ This is a simple queue-based message delivery service written using Node.js.
 
 The "-d" flag specifies the JSON data, and the "-H" flag specifies the POST content as JSON.
 
-*NOTE: when making CURL requests on Windows you can only enter double quotes, i.e. ", and you must escape them with a backslash, i.e. \"*
+*NOTE: when making CURL requests on Windows you can only enter double quotes and you must escape them with a backslash*
 
 ### Upcoming Changes
 
