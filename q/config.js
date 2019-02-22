@@ -1,6 +1,6 @@
 var config = {};
 
-//config.ServerPort = 3000;
+config.ServerPort = 3000;
 //config.ConcurrencyParam = 10;
 config.SigningSecret = 'QMessageServiceSigner'
 

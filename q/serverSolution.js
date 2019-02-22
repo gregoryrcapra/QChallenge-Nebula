@@ -1,6 +1,43 @@
+const express = require('express');
+const bodyParser = require('body-parser');
 const config = require("./config");
 const transform = require("./transform");
 const dispatch = require("./dispatch");
+
+var app = express();
+var svc;
+
+//middleware
+app.use(bodyParser.json());
+
+//configure server
+app.listen(config.ServerPort, () => {
+  svc = getMessageService();
+  console.log("Server running on port " + config.ServerPort);
+});
+
+//handle root route
+app.get("/", (req,res) =>{
+  res.send("Please make an 'enqueue' or 'next' request.");
+});
+
+//route for 'enqueue' request
+app.post("/enqueue", (req,res) => {
+  svc.enqueue(req.body);
+  res.send("Message has been enqueued");
+});
+
+//route for 'next' request
+app.post("/next", (req,res) => {
+  const rawReturn = svc.next(req.body.queue);
+  try{
+    const returned = JSON.parse(rawReturn);
+    res.json(returned);
+  }
+  catch(error){
+    res.send("There was an error parsing the returned JSON: " + error);
+  }
+});
 
 var inputQueue,queue0,queue1,queue2,queue3,queue4;
 var sequenceMap;
@@ -23,7 +60,7 @@ function getMessageService(){
 
 //callable function -> enqueue's item by transforming & dispatching
 function enqueue(message){
-  transform.transformMessage(message, false, (error,transformedMessage) =>{
+  transform.transformMessage(message, true, (error,transformedMessage) =>{
     if(error){
       console.log("ERROR: An error occurred while applying transformations: " + error)
     }
@@ -130,7 +167,3 @@ function dequeue(queue){
 
   return JSON.stringify(queue.pop())
 }
-
-module.exports = {
-  getMessageService: getMessageService
-};

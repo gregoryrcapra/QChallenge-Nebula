@@ -3,12 +3,17 @@ const crypto = require("crypto");
 const config = require("./config");
 
 //wrapper function with error handling & callback
-var transformMessage = (message,callback) => {
-  try{
-    var parsedMessage = JSON.parse(message);
+var transformMessage = (message,server,callback) => {
+  if (server){
+    var parsedMessage = message;
   }
-  catch(error){
-    console.log("ERROR: An error occurred while parsing the JSON: " + error);
+  else{
+    try{
+      var parsedMessage = JSON.parse(message);
+    }
+    catch(error){
+      console.log("ERROR: An error occurred while parsing the JSON: " + error);
+    }
   }
   var modifiedMessageObject = applyTransformations(parsedMessage);
   callback(undefined, modifiedMessageObject);
