@@ -12,7 +12,7 @@ This is a simple queue-based message delivery service written using Node.js.
 
 ### Run Instructions- Server
 
-1) Follow steps 1-3 above
+1) Follow steps 1-3 above, however this time navigate one level deeper into "\q"
 2) Run **node serverSolution.js**, this will start the server running on port 3000
 3) Open up another terminal window
 4) Make 'enqueue' or 'next' requests from the new window in this manner:
